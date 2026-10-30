@@ -1,0 +1,15 @@
+grupo,criterio,peso
+Recência,Jogos 1 a 10 (mais recentes),3
+Recência,Jogos 11 a 20,2.5
+Recência,Jogos 21 a 30,2
+Recência,Jogos 31 a 40,1.5
+Recência,Jogos 41 a 50,1
+Importância,"Estadual (classificação), grupos de regional e Taça Rio de consolação",1.0
+Importância,"Mata-mata de estadual ou regional, incluindo finais de turno",1.2
+Importância,Final de estadual ou regional,1.5
+Importância,Supercopa do Brasil e Recopa,1.5
+Importância,Série B,1.5
+Importância,Brasileirão e fase de grupos da Libertadores,1.75
+Importância,"Mata-mata de Copa do Brasil, Libertadores ou Sul-Americana",2.0
+Importância,"Final de Copa do Brasil, Libertadores ou Sul-Americana",2.5
+Bônus,Classificação ou título em mata-mata: jogo extra com o peso da fase,

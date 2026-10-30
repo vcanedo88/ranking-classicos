@@ -1,0 +1,27 @@
+{
+  "recencia": [3, 2.5, 2, 1.5, 1],
+  "importancia": {
+    "estadual": 1.0,
+    "mata_mata_estadual": 1.2,
+    "final_estadual": 1.5,
+    "supercopa": 1.5,
+    "serie_b": 1.5,
+    "brasileirao": 1.75,
+    "grupos_libertadores": 1.75,
+    "grupos_sula": 1.5,
+    "mata_mata_copa": 2.0,
+    "final_copa": 2.5
+  },
+  "rotulos": {
+    "estadual": "Estadual (classificação), grupos de regional e Taça Rio de consolação",
+    "mata_mata_estadual": "Mata-mata de estadual ou regional, incluindo finais de turno",
+    "final_estadual": "Final de estadual ou regional",
+    "supercopa": "Supercopa do Brasil e Recopa",
+    "serie_b": "Série B",
+    "brasileirao": "Brasileirão e fase de grupos da Libertadores",
+    "mata_mata_copa": "Mata-mata de Copa do Brasil, Libertadores ou Sul-Americana",
+    "final_copa": "Final de Copa do Brasil, Libertadores ou Sul-Americana"
+  },
+  "limiar_freguesia": 65,
+  "limiar_vantagem": 55
+}

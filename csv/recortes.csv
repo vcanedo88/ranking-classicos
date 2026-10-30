@@ -1,0 +1,81 @@
+classico,recorte,dominante,fregues,v_dom,empates,v_fregues,gols_dom,gols_fregues,aproveitamento,desde
+Flamengo x Vasco,10,Flamengo,Vasco,6,4,0,20,7,73.3,2024-06-02
+Flamengo x Vasco,20,Flamengo,Vasco,13,5,2,36,16,73.3,2021-04-15
+Flamengo x Vasco,30,Flamengo,Vasco,19,9,2,56,25,73.3,2018-09-15
+Flamengo x Vasco,40,Flamengo,Vasco,21,15,4,62,32,65.0,2016-02-14
+Flamengo x Vasco,50,Flamengo,Vasco,23,19,8,70,42,58.7,2014-02-16
+Flamengo x Fluminense,10,Flamengo,Fluminense,4,3,3,8,8,50.0,2024-10-17
+Flamengo x Fluminense,20,Flamengo,Fluminense,9,7,4,19,13,56.7,2023-04-01
+Flamengo x Fluminense,30,Flamengo,Fluminense,11,9,10,29,28,46.7,2021-05-15
+Flamengo x Fluminense,40,Flamengo,Fluminense,16,11,13,41,37,49.2,2019-06-09
+Flamengo x Fluminense,50,Flamengo,Fluminense,21,14,15,57,50,51.3,2017-10-25
+Flamengo x Botafogo,10,Flamengo,Botafogo,7,1,2,17,8,73.3,2024-02-07
+Flamengo x Botafogo,20,Flamengo,Botafogo,14,2,4,33,15,73.3,2020-03-07
+Flamengo x Botafogo,30,Flamengo,Botafogo,21,2,7,47,24,72.2,2017-08-23
+Flamengo x Botafogo,40,Flamengo,Botafogo,24,7,9,58,34,65.8,2014-07-27
+Flamengo x Botafogo,50,Flamengo,Botafogo,27,12,11,70,42,62.0,2012-02-05
+Fluminense x Botafogo,10,Botafogo,Fluminense,6,1,3,13,8,63.3,2023-10-08
+Fluminense x Botafogo,20,Botafogo,Fluminense,9,3,8,21,19,50.0,2020-10-04
+Fluminense x Botafogo,30,Botafogo,Fluminense,11,6,13,26,31,43.3,2017-11-04
+Fluminense x Botafogo,40,Botafogo,Fluminense,17,7,16,40,40,48.3,2015-04-11
+Fluminense x Botafogo,50,Botafogo,Fluminense,21,10,19,51,48,48.7,2012-07-15
+Fluminense x Vasco,10,Vasco,Fluminense,4,2,4,12,10,46.7,2025-05-24
+Fluminense x Vasco,20,Vasco,Fluminense,6,6,8,23,23,40.0,2020-12-13
+Fluminense x Vasco,30,Vasco,Fluminense,11,9,10,33,31,46.7,2018-03-07
+Fluminense x Vasco,40,Vasco,Fluminense,17,10,13,43,42,50.8,2014-03-27
+Fluminense x Vasco,50,Vasco,Fluminense,23,12,15,60,55,54.0,2011-11-27
+Vasco x Botafogo,10,Botafogo,Vasco,4,3,3,14,9,50.0,2024-06-29
+Vasco x Botafogo,20,Botafogo,Vasco,9,4,7,27,18,51.7,2021-03-21
+Vasco x Botafogo,30,Botafogo,Vasco,13,7,10,37,29,51.1,2018-06-02
+Vasco x Botafogo,40,Botafogo,Vasco,16,9,15,49,43,47.5,2016-05-01
+Vasco x Botafogo,50,Botafogo,Vasco,19,12,19,61,54,46.0,2013-03-10
+Corinthians x Palmeiras,10,Palmeiras,Corinthians,3,4,3,9,7,43.3,2025-02-06
+Corinthians x Palmeiras,20,Palmeiras,Corinthians,8,7,5,24,17,51.7,2021-09-25
+Corinthians x Palmeiras,30,Palmeiras,Corinthians,11,13,6,38,24,51.1,2019-08-04
+Corinthians x Palmeiras,40,Palmeiras,Corinthians,14,13,13,44,35,45.8,2016-09-17
+Corinthians x Palmeiras,50,Palmeiras,Corinthians,17,18,15,57,47,46.0,2013-02-17
+Corinthians x São Paulo,10,São Paulo,Corinthians,6,2,2,20,13,66.7,2023-08-16
+Corinthians x São Paulo,20,São Paulo,Corinthians,9,7,4,31,23,56.7,2021-05-02
+Corinthians x São Paulo,30,São Paulo,Corinthians,12,10,8,40,32,51.1,2018-07-21
+Corinthians x São Paulo,40,São Paulo,Corinthians,14,14,12,52,44,46.7,2016-07-17
+Corinthians x São Paulo,50,São Paulo,Corinthians,16,17,17,62,62,43.3,2013-10-13
+Corinthians x Santos,10,Corinthians,Santos,4,3,3,11,10,50.0,2023-06-21
+Corinthians x Santos,20,Corinthians,Santos,8,6,6,23,16,50.0,2021-02-17
+Corinthians x Santos,30,Corinthians,Santos,10,11,9,30,23,45.6,2018-03-04
+Corinthians x Santos,40,Corinthians,Santos,14,11,15,38,34,44.2,2015-06-20
+Corinthians x Santos,50,Corinthians,Santos,17,17,16,48,45,45.3,2012-11-24
+Palmeiras x São Paulo,10,Palmeiras,São Paulo,8,2,0,15,5,86.7,2024-04-29
+Palmeiras x São Paulo,20,Palmeiras,São Paulo,11,6,3,26,11,65.0,2022-06-23
+Palmeiras x São Paulo,30,Palmeiras,São Paulo,15,9,6,38,20,60.0,2021-05-20
+Palmeiras x São Paulo,40,Palmeiras,São Paulo,18,14,8,46,25,56.7,2018-10-06
+Palmeiras x São Paulo,50,Palmeiras,São Paulo,25,15,10,67,33,60.0,2015-06-28
+Palmeiras x Santos,10,Palmeiras,Santos,5,3,2,11,4,60.0,2024-03-31
+Palmeiras x Santos,20,Palmeiras,Santos,13,4,3,28,12,71.7,2021-05-06
+Palmeiras x Santos,30,Palmeiras,Santos,17,8,5,42,22,65.6,2018-03-27
+Palmeiras x Santos,40,Palmeiras,Santos,21,11,8,52,31,61.7,2015-12-02
+Palmeiras x Santos,50,Palmeiras,Santos,23,12,15,60,46,54.0,2013-04-27
+São Paulo x Santos,10,Santos,São Paulo,4,2,4,11,14,46.7,2023-02-12
+São Paulo x Santos,20,Santos,São Paulo,7,5,8,21,29,43.3,2019-11-16
+São Paulo x Santos,30,Santos,São Paulo,12,6,12,35,40,46.7,2016-06-26
+São Paulo x Santos,40,Santos,São Paulo,16,9,15,50,50,47.5,2014-02-23
+São Paulo x Santos,50,Santos,São Paulo,21,11,18,67,61,49.3,2011-04-30
+Grêmio x Internacional,10,Grêmio,Internacional,3,6,1,15,11,50.0,2025-03-16
+Grêmio x Internacional,20,Grêmio,Internacional,6,7,7,28,25,41.7,2022-03-19
+Grêmio x Internacional,30,Grêmio,Internacional,10,10,10,37,32,44.4,2020-08-05
+Grêmio x Internacional,40,Grêmio,Internacional,14,15,11,43,34,47.5,2018-05-12
+Grêmio x Internacional,50,Grêmio,Internacional,18,18,14,57,42,48.0,2015-05-03
+Cruzeiro x Atlético-MG,10,Atlético-MG,Cruzeiro,3,3,4,9,11,40.0,2025-05-18
+Cruzeiro x Atlético-MG,20,Atlético-MG,Cruzeiro,8,6,6,24,19,50.0,2022-04-02
+Cruzeiro x Atlético-MG,30,Atlético-MG,Cruzeiro,12,9,9,35,29,50.0,2019-01-27
+Cruzeiro x Atlético-MG,40,Atlético-MG,Cruzeiro,17,11,12,48,38,51.7,2017-04-01
+Cruzeiro x Atlético-MG,50,Atlético-MG,Cruzeiro,19,15,16,58,51,48.0,2014-11-26
+Bahia x Vitória,10,Bahia,Vitória,6,3,1,14,6,70.0,2024-08-11
+Bahia x Vitória,20,Bahia,Vitória,8,8,4,26,19,53.3,2021-03-13
+Bahia x Vitória,30,Bahia,Vitória,14,11,5,43,28,58.9,2017-10-22
+Bahia x Vitória,40,Bahia,Vitória,16,14,10,50,40,51.7,2015-10-03
+Bahia x Vitória,50,Bahia,Vitória,19,19,12,63,51,50.7,2013-07-21
+Athletico-PR x Coritiba,10,Athletico-PR,Coritiba,2,5,3,10,11,36.7,2023-02-05
+Athletico-PR x Coritiba,20,Athletico-PR,Coritiba,8,8,4,20,16,53.3,2020-08-02
+Athletico-PR x Coritiba,30,Athletico-PR,Coritiba,10,11,9,26,29,45.6,2017-04-30
+Athletico-PR x Coritiba,40,Athletico-PR,Coritiba,14,12,14,37,39,45.0,2014-10-04
+Athletico-PR x Coritiba,50,Athletico-PR,Coritiba,18,15,17,53,51,46.0,2012-05-06

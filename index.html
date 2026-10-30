@@ -1,0 +1,645 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Ranking das Freguesias</title>
+<meta name="description" content="Índice de Freguesia 2.0 dos 16 principais clássicos do futebol brasileiro, com os últimos 50 jogos de cada um. Canal do Canedo.">
+<link rel="stylesheet" href="assets/fonte.css">
+<style>
+:root {
+  --color-bg: #f6f7f9; --color-panel: #ffffff; --color-fg: #16181d; --color-fg-muted: #5b6270; --color-border-line: #e2e5ea;
+  --color-ok: #1a7f37; --color-warn: #b45309; --color-bad: #c2261c;
+  --cds-chart-muted: #b9bfc9; --cds-surface-popover: #ffffff; --cds-border: #d5d9e0; --cds-text-secondary: #5b6270;
+  --cds-shadow-popover: 0 6px 20px rgba(16, 24, 40, .14);
+  --cds-gap-xs: 4px; --cds-gap-sm: 8px; --cds-gap-md: 12px; --cds-gap-lg: 20px; --cds-gap-xl: 28px;
+  --cds-pad-xs: 4px; --cds-pad-sm: 8px; --cds-pad-md: 14px; --cds-pad-lg: 20px; --cds-radius: 8px;
+  --cds-font-size-caption: 12.5px; --cds-font-size-body: 14px; --cds-font-size-heading: 17px; --cds-font-size-title: 28px;
+  --cds-font-weight-medium: 600; --cds-dur-slow: 240ms;
+  --font-anthropic-sans: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; --font-anthropic-serif: var(--font-anthropic-sans);
+  --fg-c1: #1f6feb; --fg-c2: #e4572e;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-bg: #0f1115; --color-panel: #171a21; --color-fg: #eceef2; --color-fg-muted: #9aa3b2; --color-border-line: #2a2f3a;
+    --color-ok: #3fb950; --color-warn: #e3a008; --color-bad: #f0645a;
+    --cds-chart-muted: #4a5160; --cds-surface-popover: #1f232c; --cds-border: #343a46; --cds-text-secondary: #9aa3b2;
+    --cds-shadow-popover: 0 6px 20px rgba(0, 0, 0, .5);
+    --fg-c1: #4c8dff; --fg-c2: #ff7a59;
+    color-scheme: dark;
+  }
+}
+html, body { margin: 0; background: var(--color-bg); color: var(--color-fg); }
+#dash-root { padding: 12px max(12px, env(safe-area-inset-right, 0px)) 24px max(12px, env(safe-area-inset-left, 0px)); }
+.fg-rodape { margin: 0; font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); font-family: 'Montserrat', var(--font-anthropic-sans); font-weight: 500; }
+.fg-rodape a { color: inherit; }
+</style>
+<script>
+/* Mini-runtime: carrega data/*.json e executa os desenhos marcados com data-draw */
+window.dash = (() => {
+  const store = {}, draws = {}, ids = ['ranking', 'recortes', 'jogos', 'indices', 'matamatas', 'pesos', 'meta'];
+  const css = (v) => getComputedStyle(document.documentElement).getPropertyValue(v).trim();
+  const api = {
+    get colors() { return [css('--fg-c1') || '#1f6feb', css('--fg-c2') || '#e4572e']; },
+    data(id) { return store[id] ? { status: 'ok', data: store[id] } : { status: 'loading', data: [] }; },
+    draw(name, fn) { if (fn) draws[name] = fn; run(name); },
+  };
+  function run(name) {
+    const fn = draws[name]; if (!fn) return;
+    document.querySelectorAll('[data-draw="' + name + '"]').forEach((el) => { try { fn(el); } catch (e) { console.error(name, e); } });
+  }
+  const runAll = () => Object.keys(draws).forEach(run);
+  Promise.all(ids.map((id) => fetch('data/' + id + '.json', { cache: 'no-cache' }).then((r) => r.json()).then((d) => { store[id] = d; })))
+    .then(runAll).catch((e) => console.error('Falha ao carregar dados', e));
+  matchMedia('(prefers-color-scheme: dark)').addEventListener('change', runAll);
+  return api;
+})();
+</script>
+<style>
+.fg-page { --fg-font: 'Montserrat', var(--font-anthropic-sans); }
+.fg-page { display: flex; flex-direction: column; gap: var(--cds-gap-xl); font-family: var(--fg-font); color: var(--color-fg); }
+.fg-head { display: flex; flex-direction: column; gap: var(--cds-gap-sm); }
+.fg-title { font-family: var(--fg-font); font-weight: 700; letter-spacing: -0.01em; font-size: var(--cds-font-size-title); margin: 0; text-wrap: balance; }
+.fg-lede { margin: 0; font-size: var(--cds-font-size-body); color: var(--color-fg-muted); max-width: 72ch; }
+.fg-page .fg-lede b { color: var(--color-fg); font-weight: 600; }
+.fg-card { background: var(--color-panel); border: 1px solid var(--color-border-line); border-radius: var(--cds-radius); padding: var(--cds-pad-lg); display: flex; flex-direction: column; gap: var(--cds-gap-md); min-width: 0; }
+.fg-h2 { margin: 0; font-size: var(--cds-font-size-heading); font-weight: var(--cds-font-weight-medium); }
+.fg-note { margin: 0; font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); max-width: 85ch; }
+.fg-wrap { overflow-x: auto; min-width: 0; }
+.fg-table { width: 100%; border-collapse: collapse; font-size: var(--cds-font-size-body); font-variant-numeric: tabular-nums; }
+.fg-table th { text-align: center; font-weight: var(--cds-font-weight-medium); font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); padding: var(--cds-pad-xs) var(--cds-pad-sm); border-bottom: 1px solid var(--color-border-line); white-space: nowrap; position: sticky; top: 0; background: var(--color-panel); z-index: 1; }
+.fg-table td { padding: var(--cds-pad-xs) var(--cds-pad-sm); border-bottom: 1px solid var(--color-border-line); white-space: nowrap; vertical-align: middle; text-align: center; }
+.fg-table td > .fg-team, .fg-table td > .fg-pair, .fg-table td > .fg-idx { justify-content: center; }
+.fg-table .fg-num { text-align: center; }
+.fg-click tbody tr { cursor: pointer; }
+.fg-click tbody tr:hover td { background: color-mix(in srgb, var(--color-fg) 5%, transparent); }
+.fg-click tbody tr.fg-on td { background: color-mix(in srgb, var(--color-fg) 9%, transparent); }
+.fg-clas { display: flex; align-items: center; gap: var(--cds-gap-sm); font-weight: 600; }
+.fg-pair { display: inline-flex; align-items: center; gap: 2px; flex: none; }
+.fg-crest { width: 1.4rem; height: 1.4rem; object-fit: contain; display: block; }
+.fg-team { display: inline-flex; align-items: center; gap: var(--cds-gap-xs); }
+.fg-sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.fg-only .fg-crest { width: 1.6rem; height: 1.6rem; }
+.fg-pair .fg-x { color: var(--color-fg-muted); font-size: var(--cds-font-size-caption); padding: 0 2px; }
+.fg-controls { display: flex; flex-direction: column; gap: var(--cds-gap-sm); align-items: flex-end; }
+.fg-ctl { display: flex; align-items: center; gap: var(--cds-gap-sm); flex-wrap: wrap; justify-content: flex-end; }
+.fg-ctl > span { font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); }
+@media (max-width: 720px) { .fg-controls, .fg-ctl { align-items: flex-start; justify-content: flex-start; } }
+.fg-idx { display: flex; align-items: center; gap: var(--cds-gap-sm); min-width: 9rem; }
+.fg-idx-bar { flex: 1; height: 0.5rem; border-radius: var(--cds-radius); background: color-mix(in srgb, var(--color-fg) 8%, transparent); overflow: hidden; }
+.fg-idx-bar i { display: block; height: 100%; border-radius: var(--cds-radius); }
+.fg-idx-v { width: 2.6rem; text-align: center; font-weight: 600; }
+.fg-heat { text-align: center; border-radius: 3px; }
+.fg-pill { display: inline-block; padding: 1px var(--cds-pad-sm); border-radius: 999px; font-size: var(--cds-font-size-caption); border: 1px solid var(--color-border-line); }
+.fg-pill--f { color: var(--color-bad); border-color: currentColor; font-weight: 600; }
+.fg-pill--v { color: var(--color-warn); border-color: currentColor; }
+.fg-pill--e { color: var(--color-fg-muted); }
+.fg-sec { color: var(--color-fg-muted); font-size: var(--cds-font-size-caption); }
+@media (max-width: 720px) { .fg-hide-n { display: none; } }
+.fg-filters { display: flex; flex-wrap: wrap; gap: var(--cds-gap-xs); }
+.fg-filters button { font: inherit; font-size: var(--cds-font-size-caption); color: var(--color-fg); background: transparent; border: 1px solid var(--color-border-line); border-radius: 999px; padding: var(--cds-pad-xs) var(--cds-pad-md); cursor: pointer; }
+.fg-filters button[aria-pressed="true"] { background: var(--color-fg); color: var(--color-bg); border-color: var(--color-fg); }
+.fg-filters button:focus-visible, .fg-detail-top select:focus-visible { outline: 2px solid var(--color-fg); outline-offset: 2px; }
+.fg-card-top { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: var(--cds-gap-md); }
+.fg-card-top > div { display: flex; flex-direction: column; gap: var(--cds-gap-xs); min-width: 0; }
+.fg-detail-top { display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: var(--cds-gap-md); }
+.fg-detail-top label { display: flex; flex-direction: column; gap: var(--cds-gap-xs); font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); }
+.fg-detail-top select { font: inherit; font-size: var(--cds-font-size-body); color: var(--color-fg); background: var(--color-bg); border: 1px solid var(--color-border-line); border-radius: var(--cds-radius); padding: var(--cds-pad-xs) var(--cds-pad-sm); max-width: 100%; }
+.fg-vs { display: flex; flex-wrap: wrap; align-items: center; gap: var(--cds-gap-md); font-family: var(--fg-font); font-size: var(--cds-font-size-title); font-weight: 700; margin: 0; }
+.fg-vs .fg-crest { width: 2.6rem; height: 2.6rem; }
+.fg-vs-x { color: var(--color-fg-muted); font-size: var(--cds-font-size-heading); }
+.fg-facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 12rem), 1fr)); gap: var(--cds-gap-md); }
+.fg-fact { display: flex; flex-direction: column; gap: var(--cds-gap-xs); }
+.fg-fact span { font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); }
+.fg-fact strong { font-family: var(--fg-font); font-weight: 600; font-size: var(--cds-font-size-heading); }
+.fg-grid2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 24rem), 1fr)); gap: var(--cds-gap-md); }
+.fg-strip { position: relative; display: grid; grid-template-columns: repeat(25, minmax(0, 1fr)); gap: 3px; min-height: 2.6rem; }
+.fg-strip i { aspect-ratio: 1; border-radius: 2px; display: block; position: relative; }
+.fg-strip i.fg-mm::after { content: ""; position: absolute; inset: 30%; border-radius: 50%; background: var(--color-panel); }
+.fg-legend { display: flex; flex-wrap: wrap; gap: var(--cds-gap-md); font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); margin: 0; }
+.fg-legend span { display: inline-flex; align-items: center; gap: var(--cds-gap-xs); }
+.fg-legend i { width: 0.7rem; height: 0.7rem; border-radius: 2px; display: inline-block; position: relative; }
+.fg-legend i.fg-mm::after { content: ""; position: absolute; inset: 28%; border-radius: 50%; background: var(--color-panel); }
+.fg-tip { position: absolute; z-index: 2; pointer-events: none; background: var(--cds-surface-popover); border: 1px solid var(--cds-border); border-radius: var(--cds-radius); box-shadow: var(--cds-shadow-popover); padding: var(--cds-pad-xs) var(--cds-pad-sm); font-size: var(--cds-font-size-caption); white-space: nowrap; }
+.fg-tip em { display: block; font-style: normal; color: var(--cds-text-secondary); }
+.fg-games { max-height: 30rem; overflow: auto; }
+.fg-method { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 22rem), 1fr)); gap: var(--cds-gap-md); }
+.fg-list { margin: 0; padding-left: 1.1rem; display: flex; flex-direction: column; gap: var(--cds-gap-xs); font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); }
+.fg-formula { margin: 0; font-size: var(--cds-font-size-body); }
+[data-dash-source-state=refreshing] { opacity: .5; transition: opacity var(--cds-dur-slow); }
+
+/* Ajustes para caber em 4:3 (OBS) e leitura com Montserrat — pesos em três níveis */
+
+.fg-page { font-weight: 500; gap: var(--cds-gap-lg); }
+.fg-title { font-weight: 700; }
+.fg-h2 { font-weight: 600; }
+.fg-lede, .fg-note, .fg-list { font-weight: 500; }
+.fg-page .fg-lede b { font-weight: 700; }
+.fg-card { padding: var(--cds-pad-md); }
+.fg-table th { white-space: normal; font-weight: 600; padding: var(--cds-pad-xs) 4px; line-height: 1.2; vertical-align: bottom; }
+.fg-table td { font-weight: 500; padding: 3px 5px; }
+.fg-table td.fg-sec { color: var(--color-fg); font-size: inherit; }
+.fg-table td.fg-long { white-space: normal; min-width: 7rem; }
+.fg-table td.fg-strong { font-weight: 700; }
+.fg-idx { min-width: 6rem; gap: 6px; }
+.fg-idx-v { font-weight: 700; width: 2.4rem; }
+.fg-heat { font-weight: 500; }
+.fg-pill { font-weight: 600; padding: 1px 6px; }
+.fg-pill--f { font-weight: 700; }
+.fg-pill--e { color: var(--color-fg); font-weight: 500; }
+.fg-fact strong { font-weight: 700; }
+.fg-vs { font-weight: 700; }
+.fg-filters button { font-weight: 600; }
+.fg-filters button[aria-pressed="true"] { font-weight: 700; }
+.fg-ctl > span { font-weight: 600; }
+.fg-only .fg-crest { width: 1.5rem; height: 1.5rem; }
+.fg-grid2 > *, .fg-method > * { min-width: 0; }
+.fg-method .fg-table td { white-space: normal; }
+</style>
+</head>
+<body>
+<div id="dash-root">
+
+
+<div class="fg-page">
+  <header class="fg-head">
+    <h1 class="fg-title">Ranking das Freguesias</h1>
+    <p class="fg-rodape">Atualizado em <span data-draw="meta-at">—</span>, com jogos até <span data-draw="meta-ult">—</span>. Dados conferidos no oGol. Método e base completa no <a href="https://github.com/vcanedo88/ranking-classicos">GitHub</a>.</p>
+    <p class="fg-lede">Na conta com pesos, a maior freguesia entre os 16 clássicos é <b data-draw="top-clas" data-source="indices" data-field="classico">—</b>: o <b data-draw="top-dom" data-source="indices" data-field="dominante">—</b> tem índice <b data-draw="top-idx" data-source="indices" data-field="indice">—</b> nos últimos 50 jogos. Toque em um clássico para ver o detalhe.</p>
+  </header>
+
+  <section class="fg-card" id="ranking">
+    <div class="fg-card-top">
+      <div>
+        <h2 class="fg-h2">Índice de Freguesia 2.0</h2>
+        <p class="fg-note">Aproveitamento do time dominante nos últimos 50 jogos oficiais, com peso por recência e por importância do jogo, mais um jogo extra para quem avançou em cada mata-mata. Os filtros escolhem a janela (últimos 50, 40, 30, 20 ou 10 jogos) e a competição dentro dela. O ranking é recalculado a cada combinação.</p>
+      </div>
+      <div class="fg-controls">
+        <div class="fg-ctl"><span>Competição</span>
+          <div class="fg-filters" role="group" aria-label="Competição">
+            <button type="button" data-f="Todas" aria-pressed="true">Todas</button>
+            <button type="button" data-f="Estaduais" aria-pressed="false">Estaduais</button>
+            <button type="button" data-f="Brasileirão" aria-pressed="false">Brasileirão</button>
+            <button type="button" data-f="Copas" aria-pressed="false">Copas</button>
+            <button type="button" data-f="Mata-mata" aria-pressed="false">Só mata-mata</button>
+          </div>
+        </div>
+        <div class="fg-ctl"><span>Últimos jogos</span>
+          <div class="fg-filters" role="group" aria-label="Últimos jogos">
+            <button type="button" data-j="50" aria-pressed="true">50</button>
+            <button type="button" data-j="40" aria-pressed="false">40</button>
+            <button type="button" data-j="30" aria-pressed="false">30</button>
+            <button type="button" data-j="20" aria-pressed="false">20</button>
+            <button type="button" data-j="10" aria-pressed="false">10</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="fg-wrap">
+      <table class="fg-table fg-click" data-source="indices" data-row-key="classico,filtro,janela">
+        <thead>
+          <tr>
+            <th data-field="pos">#</th>
+            <th data-field="classico">Clássico</th>
+            <th data-field="dominante">Dominante</th>
+            <th data-field="indice">Índice</th>
+            <th data-field="nivel">Nível</th>
+            <th data-field="jogos" class="fg-num">Jogos</th>
+            <th data-field="v" class="fg-num">V</th>
+            <th data-field="e" class="fg-num">E</th>
+            <th data-field="d" class="fg-num">D</th>
+            <th data-field="jejum_time">Jejum</th>
+            <th data-field="jejum_jogos" class="fg-num">Sem vencer</th>
+            <th data-field="jejum_desde">Última vitória</th>
+            <th data-field="inicio">Jogos desde</th>
+          </tr>
+        </thead>
+        <tbody data-draw="rk"></tbody>
+      </table>
+    </div>
+    <p class="fg-note">Com poucos jogos no filtro (menos de 12% da janela, mínimo 3), o clássico vai para o fim da lista. Jejum = escudo do time que está há mais jogos sem vencer o rival hoje, quantos jogos e a data da última vitória dele. Jogos desde = data do jogo mais antigo da janela escolhida. No clássico, à esquerda fica o escudo do dominante; nos casos de equilíbrio, o de quem tem mais vitórias na janela. Os mata-matas vencidos por cada lado aparecem no detalhe do clássico.</p>
+  </section>
+
+  <section class="fg-card" id="recortes-simples">
+    <h2 class="fg-h2">Recortes sem peso</h2>
+    <p class="fg-note">Aproveitamento do dominante nos últimos 10, 20, 30, 40 e 50 jogos, cada jogo valendo o mesmo. O índice simples é a média dos cinco recortes. Jejum = jogos seguidos sem vitória do freguês até hoje.</p>
+    <div class="fg-wrap">
+      <table class="fg-table fg-click" data-source="ranking" data-row-key="classico">
+        <thead>
+          <tr>
+            <th data-field="classico">Clássico</th>
+            <th data-field="dominante">Dominante</th>
+            <th data-field="indice_simples" class="fg-num">Índice simples</th>
+            <th data-field="ap10" class="fg-num">10</th>
+            <th data-field="ap20" class="fg-num">20</th>
+            <th data-field="ap30" class="fg-num">30</th>
+            <th data-field="ap40" class="fg-num">40</th>
+            <th data-field="ap50" class="fg-num">50</th>
+            <th data-field="jejum" class="fg-num">Jejum</th>
+            <th data-field="ult_vit_fregues" class="fg-hide-n">Última vitória do freguês</th>
+          </tr>
+        </thead>
+        <tbody data-draw="simp"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="fg-card" id="detalhe">
+    <div class="fg-detail-top">
+      <p class="fg-vs" data-draw="d-vs" data-source="ranking">—</p>
+      <label for="fg-sel">Clássico
+        <select id="fg-sel" data-draw="sel" data-source="ranking" aria-label="Clássico"></select>
+      </label>
+    </div>
+    <div class="fg-facts">
+      <div class="fg-fact"><span>Índice 2.0</span><strong data-draw="d-idx" data-source="ranking" data-field="indice">—</strong></div>
+      <div class="fg-fact"><span>Índice simples</span><strong data-draw="d-simp" data-source="ranking" data-field="indice_simples">—</strong></div>
+      <div class="fg-fact"><span>Mata-matas (dominante x freguês)</span><strong data-draw="d-mm" data-source="ranking" data-field="mata_matas">—</strong></div>
+      <div class="fg-fact"><span>Jogos seguidos sem vitória do freguês</span><strong data-draw="d-jej" data-source="ranking" data-field="jejum">—</strong></div>
+      <div class="fg-fact"><span>Última vitória do freguês</span><strong data-draw="d-ult" data-source="ranking" data-field="ult_vit_fregues">—</strong></div>
+    </div>
+
+    <div class="fg-grid2">
+      <div class="fg-card">
+        <h3 class="fg-h2">Retrospecto por recorte</h3>
+        <p class="fg-note">Sem peso, do ponto de vista do dominante. Pênaltis contam como empate. Desde = data do jogo mais antigo do recorte.</p>
+        <div class="fg-wrap">
+          <table class="fg-table" data-source="recortes" data-row-key="classico,recorte">
+            <thead>
+              <tr>
+                <th data-field="recorte">Últimos</th>
+                <th data-field="v_dom" class="fg-num">V</th>
+                <th data-field="empates" class="fg-num">E</th>
+                <th data-field="v_fregues" class="fg-num">D</th>
+                <th data-field="gols_dom" class="fg-num">GP</th>
+                <th data-field="gols_fregues" class="fg-num">GC</th>
+                <th data-field="aproveitamento" class="fg-num">Aprov.</th>
+                <th data-field="desde">Desde</th>
+              </tr>
+            </thead>
+            <tbody data-draw="rec"></tbody>
+          </table>
+        </div>
+      </div>
+      <div class="fg-card">
+        <h3 class="fg-h2">Os últimos 50 jogos</h3>
+        <p class="fg-note">Do mais recente (canto superior esquerdo) ao mais antigo. Passe o dedo ou o mouse para ver o placar.</p>
+        <div class="fg-strip" data-draw="strip" data-source="jogos"></div>
+        <p class="fg-legend"><span><i data-draw="lg-w"></i>Vitória do dominante</span><span><i data-draw="lg-e"></i>Empate</span><span><i data-draw="lg-d"></i>Vitória do freguês</span><span><i data-draw="lg-mm" class="fg-mm"></i>Jogo de mata-mata</span></p>
+      </div>
+    </div>
+
+    <div class="fg-card">
+      <h3 class="fg-h2">Mata-matas na janela</h3>
+      <p class="fg-note">Cada confronto eliminatório conta uma vez, como um jogo extra para quem avançou. Peso = recência do último jogo × peso da fase.</p>
+      <div class="fg-wrap">
+        <table class="fg-table" data-source="matamatas" data-row-key="classico,data">
+          <thead>
+            <tr>
+              <th data-field="data">Data</th>
+              <th data-field="competicao">Competição</th>
+              <th data-field="fase">Fase</th>
+              <th data-field="jogos" class="fg-hide-n">Jogos</th>
+              <th data-field="avancou">Avançou</th>
+              <th data-field="como">Como</th>
+              <th data-field="peso" class="fg-num">Peso</th>
+            </tr>
+          </thead>
+          <tbody data-draw="mm"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="fg-card">
+      <h3 class="fg-h2">Lista de jogos</h3>
+      <p class="fg-note">Peso = recência × importância do jogo. Na última partida de cada mata-mata aparece quem avançou.</p>
+      <div class="fg-wrap fg-games">
+        <table class="fg-table" data-source="jogos" data-row-key="classico,n">
+          <thead>
+            <tr>
+              <th data-field="n" class="fg-num">#</th>
+              <th data-field="data">Data</th>
+              <th data-field="mandante">Mandante</th>
+              <th data-field="gm" class="fg-num">Gols</th>
+              <th data-field="gv">Gols</th>
+              <th data-field="visitante">Visitante</th>
+              <th data-field="penaltis" class="fg-hide-n">Pênaltis</th>
+              <th data-field="competicao" class="fg-hide-n">Competição</th>
+              <th data-field="classificado" class="fg-hide-n">Avançou</th>
+              <th data-field="peso" class="fg-num">Peso</th>
+            </tr>
+          </thead>
+          <tbody data-draw="jg"></tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="fg-card" id="metodo">
+    <h2 class="fg-h2">Como o índice é calculado</h2>
+    <p class="fg-formula">Índice = soma de (peso × pontos) ÷ soma de (peso × 3), com vitória = 3, empate = 1 e derrota = 0. Dominante é o time de índice maior.</p>
+    <div class="fg-method">
+      <div class="fg-wrap">
+        <table class="fg-table" data-source="pesos" data-row-key="criterio">
+          <thead>
+            <tr>
+              <th data-field="grupo">Tipo</th>
+              <th data-field="criterio">Critério</th>
+              <th data-field="peso" class="fg-num">Peso</th>
+            </tr>
+          </thead>
+          <tbody data-draw="pesos"></tbody>
+        </table>
+      </div>
+      <ul class="fg-list">
+        <li>O peso de um jogo é a recência multiplicada pela importância. Uma semifinal de Copa do Brasil entre os 10 jogos mais recentes vale 3 × 2 = 6. Uma semifinal de estadual no mesmo bloco vale 3 × 1,2 = 3,6.</li>
+        <li>Cada mata-mata (ida e volta ou jogo único) vira um único jogo extra, vencido por quem avançou. Esse jogo extra tem o peso da fase e a recência do último jogo do confronto. Assim, quem passa nos pênaltis ou pelo agregado leva vantagem mesmo com os jogos empatados.</li>
+        <li>Finais de turno do Carioca (Taça Guanabara e Taça Rio até 2019), do Gauchão 2020 e do Paranaense 2019 valem como mata-mata. A Taça Rio de consolação (2021 em diante) vale como fase de classificação.</li>
+        <li>Quando o confronto empatou sem pênaltis, avançou quem tinha a vantagem do regulamento (melhor campanha).</li>
+        <li>Jogos oficiais dos times principais até 30/10/2026, conferidos jogo a jogo no oGol. Amistosos ficam de fora. O Vitória 0 x 3 Bahia de 2018 vale como W.O.</li>
+        <li>Nível: Freguesia a partir de <b data-draw="t-f">—</b>, Vantagem clara a partir de <b data-draw="t-v">—</b>, abaixo disso Equilíbrio.</li>
+      </ul>
+    </div>
+  </section>
+</div>
+
+<script src="assets/escudos.js"></script>
+<script>
+(() => {
+  const LIMIAR_F = 65, LIMIAR_V = 55;
+  const st = (window.fgState = window.fgState || { sel: null, filtro: 'Todas', janela: '50' });
+  if (!st.janela) st.janela = '50';
+  const num = (v) => (v === '' || v == null ? NaN : Number(v));
+  const f1 = (v) => (isNaN(num(v)) ? '—' : num(v).toFixed(1).replace('.', ','));
+  const pct = (v) => (isNaN(num(v)) ? '—' : f1(v) + '%');
+  const br = (d) => (d ? d.slice(8, 10) + '/' + d.slice(5, 7) + '/' + d.slice(0, 4) : '—');
+  const brc = (d) => (d ? d.slice(8, 10) + '/' + d.slice(5, 7) + '/' + d.slice(2, 4) : '—');
+  const ok = (id) => { const d = dash.data(id); return d.status === 'ok' ? d.data : null; };
+  const crest = (team, cls) => {
+    const src = (window.fgEscudos || {})[team];
+    if (!src) return document.createTextNode('');
+    const im = document.createElement('img');
+    im.src = src; im.alt = ''; im.className = 'fg-crest' + (cls ? ' ' + cls : ''); im.loading = 'lazy';
+    return im;
+  };
+  const teamCell = (team) => { const s = document.createElement('span'); s.className = 'fg-team'; s.append(crest(team), document.createTextNode(team)); return s; };
+  const crestOnly = (team) => { const s = document.createElement('span'); s.className = 'fg-team fg-only'; const im = crest(team); if (im.setAttribute) { im.setAttribute('title', team); } const t = document.createElement('span'); t.className = 'fg-sr'; t.textContent = team; s.append(im, t); return s; };
+  const pairOnly = (a, b, label) => { const s = document.createElement('span'); s.className = 'fg-pair fg-only'; s.setAttribute('title', label); const x = document.createElement('span'); x.className = 'fg-x'; x.textContent = '×'; const t = document.createElement('span'); t.className = 'fg-sr'; t.textContent = label; s.append(crest(a), x, crest(b), t); return s; };
+  const sel = () => {
+    const rk = ok('ranking');
+    if (!rk || !rk.length) return null;
+    if (!st.sel) { const ix = ok('indices'); const t = ix && ix.find((r) => r.filtro === 'Todas' && String(r.janela) === '50' && String(r.pos) === '1'); st.sel = t ? t.classico : rk[0].classico; }
+    return rk.find((r) => r.classico === st.sel) || rk[0];
+  };
+  const heat = (v) => {
+    const x = num(v);
+    if (isNaN(x)) return 'transparent';
+    const t = Math.max(0, Math.min(1, (x - 40) / 50));
+    return `color-mix(in srgb, ${dash.colors[0]} ${Math.round(t * 70)}%, transparent)`;
+  };
+  const nivelPill = (n) => { const p = document.createElement('span'); p.className = 'fg-pill ' + (n === 'Freguesia' ? 'fg-pill--f' : n === 'Vantagem clara' ? 'fg-pill--v' : 'fg-pill--e'); p.textContent = n; return p; };
+  const idxCell = (v) => {
+    const box = document.createElement('div'); box.className = 'fg-idx';
+    const s = document.createElement('span'); s.className = 'fg-idx-v'; s.textContent = f1(v);
+    const bar = document.createElement('div'); bar.className = 'fg-idx-bar';
+    const fill = document.createElement('i'); const x = num(v);
+    fill.style.width = (isNaN(x) ? 0 : Math.max(0, Math.min(100, ((x - 33.3) / (100 - 33.3)) * 100))) + '%';
+    fill.style.background = x >= LIMIAR_F ? 'var(--color-bad)' : x >= LIMIAR_V ? 'var(--color-warn)' : 'var(--cds-chart-muted)';
+    bar.appendChild(fill); box.append(s, bar); return box;
+  };
+  const ALL = ['top-clas', 'top-dom', 'top-idx', 'rk', 'simp', 'sel', 'd-vs', 'd-idx', 'd-simp', 'd-mm', 'd-jej', 'd-ult', 'rec', 'strip', 'mm', 'jg'];
+  const redraw = () => ALL.forEach((n) => dash.draw(n));
+  const pick = (name, scroll) => { st.sel = name; redraw(); if (scroll) { const d = document.getElementById('detalhe'); if (d) d.scrollIntoView({ behavior: 'smooth', block: 'start' }); } };
+
+  // Filtro por competição (botões fixos no HTML)
+  const syncBtns = () => document.querySelectorAll('.fg-filters button').forEach((x) => {
+    if (x.dataset.f) x.setAttribute('aria-pressed', String(x.dataset.f === st.filtro));
+    if (x.dataset.j) x.setAttribute('aria-pressed', String(x.dataset.j === st.janela));
+  });
+  syncBtns();
+  document.querySelectorAll('.fg-filters button').forEach((b) => {
+    b.addEventListener('click', () => {
+      if (b.dataset.f) st.filtro = b.dataset.f;
+      if (b.dataset.j) st.janela = b.dataset.j;
+      syncBtns();
+      dash.draw('rk');
+    });
+  });
+
+  // Cabeçalho: 1º lugar no filtro "Todas"
+  const topRow = () => { const ix = ok('indices'); return ix ? ix.find((r) => r.filtro === 'Todas' && String(r.janela) === '50' && String(r.pos) === '1') : null; };
+  const topDraw = (name, fn) => dash.draw(name, (el) => {
+    const r = topRow(); el.textContent = r ? fn(r) : '—';
+    if (r) el.setAttribute('data-where', 'classico=' + encodeURIComponent(r.classico) + '&filtro=Todas&janela=50');
+  });
+  topDraw('top-clas', (r) => r.classico);
+  topDraw('top-dom', (r) => r.dominante);
+  topDraw('top-idx', (r) => f1(r.indice));
+
+  // Ranking 2.0 (com filtro)
+  dash.draw('rk', (tb) => {
+    const ix = ok('indices');
+    tb.replaceChildren();
+    if (!ix) return;
+    const cur = sel();
+    for (const r of ix.filter((x) => x.filtro === st.filtro && String(x.janela) === st.janela)) {
+      const tr = document.createElement('tr');
+      tr.dataset.key = encodeURIComponent(r.classico) + ',' + encodeURIComponent(r.filtro) + ',' + encodeURIComponent(r.janela);
+      if (cur && r.classico === cur.classico) tr.className = 'fg-on';
+      const td = (child, cls) => { const c = document.createElement('td'); if (typeof child === 'string' || typeof child === 'number') c.textContent = child; else c.appendChild(child); if (cls) c.className = cls; tr.appendChild(c); return c; };
+      td(String(r.pos), 'fg-sec');
+      const rk = (ok('ranking') || []).find((x) => x.classico === r.classico);
+      const leftR = (r.nivel === 'Equilíbrio' && num(r.d) > num(r.v)) ? r.fregues : r.dominante;
+      const rightR = leftR === r.dominante ? r.fregues : r.dominante;
+      td(pairOnly(leftR, rightR, r.classico));
+      td(crestOnly(r.dominante));
+      td(idxCell(r.indice));
+      td(nivelPill(r.nivel));
+      td(String(r.jogos), 'fg-num'); td(String(r.v), 'fg-num'); td(String(r.e), 'fg-num'); td(String(r.d), 'fg-num');
+      td(crestOnly(r.jejum_time)); td(String(r.jejum_jogos), 'fg-num fg-strong'); td(brc(r.jejum_desde), 'fg-sec'); td(brc(r.inicio), 'fg-sec');
+      if (r.poucos === 'S') tr.style.opacity = '0.55';
+      tr.addEventListener('click', () => pick(r.classico, true));
+      tb.appendChild(tr);
+    }
+  });
+
+  // Recortes sem peso
+  dash.draw('simp', (tb) => {
+    const rk = ok('ranking');
+    tb.replaceChildren();
+    if (!rk) return;
+    const cur = sel();
+    const rows = [...rk].sort((a, b) => num(b.indice_simples) - num(a.indice_simples));
+    for (const r of rows) {
+      const tr = document.createElement('tr');
+      tr.dataset.key = r.classico;
+      if (cur && r.classico === cur.classico) tr.className = 'fg-on';
+      const td = (child, cls) => { const c = document.createElement('td'); if (typeof child === 'string') c.textContent = child; else c.appendChild(child); if (cls) c.className = cls; tr.appendChild(c); return c; };
+      const camp = String(r.campanha50 || '').match(/(\d+)V\s+(\d+)E\s+(\d+)D/);
+      const leftS = (r.nivel === 'Equilíbrio' && camp && Number(camp[3]) > Number(camp[1])) ? r.fregues : r.dominante;
+      td(pairOnly(leftS, leftS === r.dominante ? r.fregues : r.dominante, r.classico));
+      td(crestOnly(r.dominante));
+      td(f1(r.indice_simples), 'fg-num fg-strong');
+      for (const k of ['ap10', 'ap20', 'ap30', 'ap40', 'ap50']) { const c = td(f1(r[k]), 'fg-heat'); c.style.background = heat(r[k]); }
+      td(String(r.jejum), 'fg-num');
+      td(r.ult_vit_fregues, 'fg-hide-n fg-long');
+      tr.addEventListener('click', () => pick(r.classico, true));
+      tb.appendChild(tr);
+    }
+  });
+
+  // Seletor
+  dash.draw('sel', (s) => {
+    const rk = ok('ranking') || [];
+    s.replaceChildren(...rk.map((r) => new Option(r.classico, r.classico)));
+    const cur = sel(); if (cur) s.value = cur.classico;
+    s.onchange = () => pick(s.value, false);
+  });
+
+  const textDraw = (name, fn) => dash.draw(name, (el) => {
+    const r = sel();
+    el.textContent = r ? fn(r) : '—';
+    if (r) el.setAttribute('data-where', 'classico=' + encodeURIComponent(r.classico));
+  });
+  dash.draw('d-vs', (el) => {
+    const r = sel();
+    el.replaceChildren();
+    if (!r) { el.textContent = '—'; return; }
+    el.setAttribute('data-where', 'classico=' + encodeURIComponent(r.classico));
+    const a = document.createElement('span'); a.className = 'fg-team'; a.append(crest(r.dominante), document.createTextNode(r.dominante));
+    const x = document.createElement('span'); x.className = 'fg-vs-x'; x.textContent = 'contra';
+    const b = document.createElement('span'); b.className = 'fg-team'; b.append(crest(r.fregues), document.createTextNode(r.fregues));
+    el.append(a, x, b);
+  });
+  textDraw('d-idx', (r) => f1(r.indice));
+  textDraw('d-simp', (r) => f1(r.indice_simples));
+  textDraw('d-mm', (r) => r.mata_matas);
+  textDraw('d-jej', (r) => String(r.jejum));
+  textDraw('d-ult', (r) => r.ult_vit_fregues || '—');
+
+  // Recortes do clássico escolhido
+  dash.draw('rec', (tb) => {
+    const rc = ok('recortes'); const cur = sel();
+    tb.replaceChildren();
+    if (!rc || !cur) return;
+    for (const r of rc.filter((x) => x.classico === cur.classico)) {
+      const tr = document.createElement('tr');
+      tr.dataset.key = encodeURIComponent(r.classico) + ',' + encodeURIComponent(r.recorte);
+      [r.recorte + ' jogos', r.v_dom, r.empates, r.v_fregues, r.gols_dom, r.gols_fregues, pct(r.aproveitamento), br(r.desde)].forEach((t, i) => {
+        const c = document.createElement('td'); c.textContent = t; if (i > 0 && i < 7) c.className = i === 6 ? 'fg-num fg-strong' : 'fg-num'; tr.appendChild(c);
+      });
+      tb.appendChild(tr);
+    }
+  });
+
+  // Faixa dos 50 jogos
+  const outcome = (g, dom) => {
+    const gm = num(g.gm), gv = num(g.gv);
+    if (gm === gv) return 'e';
+    const w = gm > gv ? g.mandante : g.visitante;
+    return w === dom ? 'w' : 'd';
+  };
+  const colorOf = { w: () => dash.colors[0], e: () => 'var(--cds-chart-muted)', d: () => dash.colors[1] };
+  ['w', 'e', 'd'].forEach((k) => dash.draw('lg-' + k, (el) => { el.style.background = colorOf[k](); }));
+  dash.draw('lg-mm', (el) => { el.style.background = 'var(--cds-chart-muted)'; });
+  dash.draw('strip', (el) => {
+    const jg = ok('jogos'); const cur = sel();
+    el.replaceChildren();
+    if (!jg || !cur) return;
+    const tip = document.createElement('div'); tip.className = 'fg-tip'; tip.hidden = true;
+    for (const g of jg.filter((x) => x.classico === cur.classico)) {
+      const i = document.createElement('i');
+      i.style.background = colorOf[outcome(g, cur.dominante)]();
+      if (g.mata_mata === 'S') i.className = 'fg-mm';
+      const pen = g.penaltis ? ` (pên. ${g.penaltis})` : '';
+      i.setAttribute('aria-label', `${br(g.data)}: ${g.mandante} ${g.gm} x ${g.gv} ${g.visitante}${pen}`);
+      const show = () => {
+        tip.replaceChildren();
+        const em = document.createElement('em'); em.textContent = br(g.data) + ' · ' + g.competicao;
+        const s = document.createElement('span'); s.textContent = `${g.mandante} ${g.gm} x ${g.gv} ${g.visitante}${pen}`;
+        tip.append(em, s);
+        if (g.classificado) { const c = document.createElement('em'); c.textContent = 'Avançou: ' + g.classificado; tip.appendChild(c); }
+        tip.hidden = false;
+        const W = el.clientWidth, x = i.offsetLeft + i.offsetWidth / 2;
+        tip.style.top = (i.offsetTop + i.offsetHeight + 6) + 'px';
+        tip.style.left = '0px';
+        const tw = tip.offsetWidth;
+        tip.style.left = Math.max(0, Math.min(W - tw, x - tw / 2)) + 'px';
+      };
+      i.addEventListener('pointerenter', show);
+      i.addEventListener('pointerdown', show);
+      i.addEventListener('pointerleave', () => { tip.hidden = true; });
+      el.appendChild(i);
+    }
+    el.appendChild(tip);
+  });
+
+  // Lista de jogos
+  dash.draw('jg', (tb) => {
+    const jg = ok('jogos'); const cur = sel();
+    tb.replaceChildren();
+    if (!jg || !cur) return;
+    for (const g of jg.filter((x) => x.classico === cur.classico)) {
+      const tr = document.createElement('tr');
+      tr.dataset.key = encodeURIComponent(g.classico) + ',' + encodeURIComponent(g.n);
+      const o = outcome(g, cur.dominante);
+      [g.n, br(g.data), g.mandante, g.gm, g.gv, g.visitante, g.penaltis, g.competicao, g.classificado, f1(g.peso)].forEach((t, i) => {
+        const c = document.createElement('td'); c.textContent = t;
+        if (i === 0 || i === 9) c.className = 'fg-num';
+        if (i === 3 || i === 4) c.className = 'fg-num fg-strong';
+        if (i === 6 || i === 8) c.className = 'fg-hide-n';
+        if (i === 7) c.className = 'fg-hide-n fg-long';
+        tr.appendChild(c);
+      });
+      tr.firstChild.style.boxShadow = `inset 3px 0 0 ${colorOf[o]()}`;
+      tb.appendChild(tr);
+    }
+  });
+
+  // Mata-matas do clássico escolhido
+  const COMO = { agregado: 'Agregado', 'pênaltis': 'Pênaltis', vantagem: 'Vantagem (melhor campanha)', jogo: 'Jogo único' };
+  dash.draw('mm', (tb) => {
+    const mm = ok('matamatas'); const cur = sel();
+    tb.replaceChildren();
+    if (!mm || !cur) return;
+    for (const r of mm.filter((x) => x.classico === cur.classico)) {
+      const tr = document.createElement('tr');
+      tr.dataset.key = encodeURIComponent(r.classico) + ',' + encodeURIComponent(r.data);
+      const cells = [br(r.data), r.competicao, r.fase, r.jogos, null, COMO[r.como] || r.como, f1(r.peso)];
+      cells.forEach((t, i) => {
+        const c = document.createElement('td');
+        if (i === 4) c.appendChild(teamCell(r.avancou)); else c.textContent = t;
+        if (i === 3) c.className = 'fg-hide-n fg-long';
+        if (i === 1) c.className = 'fg-long';
+        if (i === 6) c.className = 'fg-num';
+        tr.appendChild(c);
+      });
+      tb.appendChild(tr);
+    }
+  });
+
+  // Pesos
+  dash.draw('pesos', (tb) => {
+    const p = ok('pesos');
+    tb.replaceChildren();
+    if (!p) return;
+    for (const r of p) {
+      const tr = document.createElement('tr');
+      [r.grupo, r.criterio, f1(r.peso)].forEach((t, i) => { const c = document.createElement('td'); c.textContent = t; if (i === 2) c.className = 'fg-num'; if (i === 0) c.className = 'fg-sec'; tr.appendChild(c); });
+      tb.appendChild(tr);
+    }
+  });
+
+  dash.draw('t-f', (el) => { el.textContent = LIMIAR_F; });
+  dash.draw('t-v', (el) => { el.textContent = LIMIAR_V; });
+})();
+</script>
+
+<script>
+dash.draw('meta-at', (el) => { const m = dash.data('meta'); const d = m.status === 'ok' ? m.data.atualizado : ''; el.textContent = d ? d.slice(8,10) + '/' + d.slice(5,7) + '/' + d.slice(0,4) : '—'; });
+dash.draw('meta-ult', (el) => { const m = dash.data('meta'); const d = m.status === 'ok' ? m.data.ultimo_jogo : ''; el.textContent = d ? d.slice(8,10) + '/' + d.slice(5,7) + '/' + d.slice(0,4) : '—'; });
+</script>
+</div>
+</body>
+</html>

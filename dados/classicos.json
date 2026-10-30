@@ -1,0 +1,114 @@
+[
+ {
+  "id": "fla_vasco",
+  "time_a": "Flamengo",
+  "time_b": "Vasco",
+  "apelido": "Clássico dos Milhões",
+  "uf": "RJ"
+ },
+ {
+  "id": "fla_flu",
+  "time_a": "Flamengo",
+  "time_b": "Fluminense",
+  "apelido": "Fla-Flu",
+  "uf": "RJ"
+ },
+ {
+  "id": "fla_bota",
+  "time_a": "Flamengo",
+  "time_b": "Botafogo",
+  "apelido": "Clássico da Rivalidade",
+  "uf": "RJ"
+ },
+ {
+  "id": "flu_bota",
+  "time_a": "Fluminense",
+  "time_b": "Botafogo",
+  "apelido": "Clássico Vovô",
+  "uf": "RJ"
+ },
+ {
+  "id": "flu_vasco",
+  "time_a": "Fluminense",
+  "time_b": "Vasco",
+  "apelido": "Clássico dos Gigantes",
+  "uf": "RJ"
+ },
+ {
+  "id": "vasco_bota",
+  "time_a": "Vasco",
+  "time_b": "Botafogo",
+  "apelido": "Clássico da Amizade",
+  "uf": "RJ"
+ },
+ {
+  "id": "cor_pal",
+  "time_a": "Corinthians",
+  "time_b": "Palmeiras",
+  "apelido": "Derby",
+  "uf": "SP"
+ },
+ {
+  "id": "cor_spfc",
+  "time_a": "Corinthians",
+  "time_b": "São Paulo",
+  "apelido": "Majestoso",
+  "uf": "SP"
+ },
+ {
+  "id": "cor_san",
+  "time_a": "Corinthians",
+  "time_b": "Santos",
+  "apelido": "Clássico Alvinegro",
+  "uf": "SP"
+ },
+ {
+  "id": "pal_spfc",
+  "time_a": "Palmeiras",
+  "time_b": "São Paulo",
+  "apelido": "Choque-Rei",
+  "uf": "SP"
+ },
+ {
+  "id": "pal_san",
+  "time_a": "Palmeiras",
+  "time_b": "Santos",
+  "apelido": "Clássico da Saudade",
+  "uf": "SP"
+ },
+ {
+  "id": "spfc_san",
+  "time_a": "São Paulo",
+  "time_b": "Santos",
+  "apelido": "San-São",
+  "uf": "SP"
+ },
+ {
+  "id": "grenal",
+  "time_a": "Grêmio",
+  "time_b": "Internacional",
+  "apelido": "Gre-Nal",
+  "uf": "RS"
+ },
+ {
+  "id": "cru_cam",
+  "time_a": "Cruzeiro",
+  "time_b": "Atlético-MG",
+  "apelido": "Clássico Mineiro",
+  "uf": "MG"
+ },
+ {
+  "id": "bavi",
+  "time_a": "Bahia",
+  "time_b": "Vitória",
+  "apelido": "Ba-Vi",
+  "uf": "BA"
+ },
+ {
+  "id": "atletiba",
+  "time_a": "Athletico-PR",
+  "time_b": "Coritiba",
+  "apelido": "Atletiba",
+  "uf": "PR"
+ }
+]

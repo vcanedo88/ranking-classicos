@@ -1,0 +1,17 @@
+pos,classico,apelido,uf,time_a,time_b,dominante,fregues,indice,indice_simples,ap10,ap20,ap30,ap40,ap50,campanha50,mata_matas,jejum,ult_vit_fregues,ultimo_jogo,nivel
+1,Flamengo x Vasco,Clássico dos Milhões,RJ,Flamengo,Vasco,Flamengo,Vasco,65.4,68.7,73.3,73.3,73.3,65.0,58.7,23V 19E 8D,7 x 4,15,05/03/2023 Flamengo 0x1 Vasco,29/10/2026 Vasco 1x4 Flamengo,Freguesia
+2,Flamengo x Botafogo,Clássico da Rivalidade,RJ,Flamengo,Botafogo,Flamengo,Botafogo,65.3,69.3,73.3,73.3,72.2,65.8,62.0,27V 12E 11D,6 x 2,7,18/08/2024 Botafogo 4x1 Flamengo,30/08/2026 Flamengo 3x0 Botafogo,Freguesia
+3,Palmeiras x Santos,Clássico da Saudade,SP,Palmeiras,Santos,Palmeiras,Santos,61.5,62.6,60.0,71.7,65.6,61.7,54.0,23V 12E 15D,5 x 3,5,15/11/2025 Santos 1x0 Palmeiras,28/10/2026 Santos 0x0 Palmeiras,Vantagem clara
+4,Palmeiras x São Paulo,Choque-Rei,SP,Palmeiras,São Paulo,Palmeiras,São Paulo,57.5,65.7,86.7,65.0,60.0,56.7,60.0,25V 15E 10D,4 x 5,13,13/07/2023 Palmeiras 1x2 São Paulo,12/09/2026 Palmeiras 2x0 São Paulo,Vantagem clara
+5,Flamengo x Fluminense,Fla-Flu,RJ,Flamengo,Fluminense,Flamengo,Fluminense,56.3,50.8,50.0,56.7,46.7,49.2,51.3,21V 14E 15D,9 x 5,3,25/01/2026 Fluminense 2x1 Flamengo,11/10/2026 Flamengo 1x0 Fluminense,Vantagem clara
+6,Fluminense x Vasco,Clássico dos Gigantes,RJ,Fluminense,Vasco,Vasco,Fluminense,56.2,47.6,46.7,40.0,46.7,50.8,54.0,23V 12E 15D,6 x 3,0,05/09/2026 Fluminense 1x0 Vasco,05/09/2026 Fluminense 1x0 Vasco,Vantagem clara
+7,Bahia x Vitória,Ba-Vi,BA,Bahia,Vitória,Bahia,Vitória,56.2,56.9,70.0,53.3,58.9,51.7,50.7,19V 19E 12D,5 x 3,4,16/10/2025 Vitória 2x1 Bahia,23/08/2026 Vitória 0x2 Bahia,Vantagem clara
+8,Grêmio x Internacional,Gre-Nal,RS,Grêmio,Internacional,Grêmio,Internacional,51.8,46.3,50.0,41.7,44.4,47.5,48.0,18V 18E 14D,8 x 2,6,25/01/2026 Internacional 4x2 Grêmio,11/10/2026 Grêmio 1x1 Internacional,Equilíbrio
+9,São Paulo x Santos,San-São,SP,São Paulo,Santos,Santos,São Paulo,51.2,46.7,46.7,43.3,46.7,47.5,49.3,21V 11E 18D,4 x 0,2,31/01/2026 São Paulo 2x0 Santos,02/10/2026 São Paulo 1x2 Santos,Equilíbrio
+10,Cruzeiro x Atlético-MG,Clássico Mineiro,MG,Cruzeiro,Atlético-MG,Atlético-MG,Cruzeiro,49.1,47.9,40.0,50.0,50.0,51.7,48.0,19V 15E 16D,6 x 5,0,29/10/2026 Atlético-MG 0x1 Cruzeiro,29/10/2026 Atlético-MG 0x1 Cruzeiro,Equilíbrio
+11,Fluminense x Botafogo,Clássico Vovô,RJ,Fluminense,Botafogo,Botafogo,Fluminense,49.0,50.7,63.3,50.0,43.3,48.3,48.7,21V 10E 19D,4 x 3,1,12/02/2026 Fluminense 1x0 Botafogo,08/08/2026 Botafogo 1x1 Fluminense,Equilíbrio
+12,Corinthians x São Paulo,Majestoso,SP,Corinthians,São Paulo,São Paulo,Corinthians,48.8,52.9,66.7,56.7,51.1,46.7,43.3,16V 17E 17D,2 x 3,0,10/05/2026 Corinthians 3x2 São Paulo,10/05/2026 Corinthians 3x2 São Paulo,Equilíbrio
+13,Vasco x Botafogo,Clássico da Amizade,RJ,Vasco,Botafogo,Botafogo,Vasco,48.7,49.3,50.0,51.7,51.1,47.5,46.0,19V 12E 19D,4 x 5,0,07/10/2026 Botafogo 1x2 Vasco,07/10/2026 Botafogo 1x2 Vasco,Equilíbrio
+14,Athletico-PR x Coritiba,Atletiba,PR,Athletico-PR,Coritiba,Athletico-PR,Coritiba,48.7,45.3,36.7,53.3,45.6,45.0,46.0,18V 15E 17D,4 x 4,2,17/01/2026 Athletico-PR 0x1 Coritiba,11/09/2026 Coritiba 3x3 Athletico-PR,Equilíbrio
+15,Corinthians x Santos,Clássico Alvinegro,SP,Corinthians,Santos,Corinthians,Santos,48.3,47.0,50.0,50.0,45.6,44.2,45.3,17V 17E 16D,4 x 1,0,30/08/2026 Corinthians 0x1 Santos,30/08/2026 Corinthians 0x1 Santos,Equilíbrio
+16,Corinthians x Palmeiras,Derby,SP,Corinthians,Palmeiras,Palmeiras,Corinthians,46.1,47.6,43.3,51.7,51.1,45.8,46.0,17V 18E 15D,3 x 3,4,06/08/2025 Palmeiras 0x2 Corinthians,11/10/2026 Palmeiras 4x1 Corinthians,Equilíbrio
