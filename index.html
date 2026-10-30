@@ -175,10 +175,7 @@ window.dash = (() => {
 .fg-pill--f { color: var(--fg-roxo); }
 .fg-pill--v { color: color-mix(in srgb, var(--fg-roxo) 65%, var(--color-fg-muted)); }
 @media (max-width: 640px) { .fg-head { padding-right: 0; } .fg-marca { position: static; align-items: flex-start; } .fg-detail-right { align-items: flex-start; } }
-#ranking { position: relative; }
-#ranking .fg-controls > .fg-selo { position: absolute; top: var(--cds-pad-md); right: var(--cds-pad-md); }
-#ranking .fg-card-top > div:first-child { padding-right: 120px; }
-@media (max-width: 640px) { #ranking .fg-controls > .fg-selo { position: static; } #ranking .fg-card-top > div:first-child { padding-right: 0; } }
+.fg-titlebar { display: flex; align-items: center; justify-content: space-between; gap: var(--cds-gap-md); flex-wrap: wrap; }
 .fg-marca img, .fg-selo img, .fg-credito img { background: light-dark(transparent, #ffffff); padding: 3px 5px; border-radius: 6px; box-sizing: content-box; }
 </style>
 </head>
@@ -195,13 +192,15 @@ window.dash = (() => {
   </header>
 
   <section class="fg-card" id="ranking">
+    <div class="fg-titlebar">
+      <h2 class="fg-h2">Índice de Freguesia 2.0</h2>
+      <div class="fg-selo"><img src="assets/marca-c.png" alt=""><span>@vcanedo</span></div>
+    </div>
     <div class="fg-card-top">
       <div>
-        <h2 class="fg-h2">Índice de Freguesia 2.0</h2>
         <p class="fg-note">Aproveitamento do time dominante nos últimos 50 jogos oficiais, com peso por recência e por importância do jogo, mais um jogo extra para quem avançou em cada mata-mata. Os filtros escolhem a janela (últimos 50, 40, 30, 20 ou 10 jogos) e a competição dentro dela. O ranking é recalculado a cada combinação.</p>
       </div>
       <div class="fg-controls">
-        <div class="fg-selo"><img src="assets/marca-c.png" alt=""><span>@vcanedo</span></div>
         <div class="fg-ctl"><span>Competição</span>
           <div class="fg-filters" role="group" aria-label="Competição">
             <button type="button" data-f="Todas" aria-pressed="true">Todas</button>
