@@ -77,7 +77,7 @@ def confrontos(games):
     ko = [g for g in sorted(games, key=lambda g: g["data"]) if g["fase"] in KO]
     ties = []
     for g in ko:
-        key = (g["comp"], g["temp"], g["fase"])
+        key = (g["comp"], g["temp"], g["fase"], g["tipo"] == "turno")  # mata-mata de turno e do campeonato são confrontos diferentes
         if ties:
             t = ties[-1]
             last = t["jogos"][-1]
@@ -138,7 +138,7 @@ def br(d):
 def comp_nome(g, uf):
     c = ESTNOME[uf] if g["comp"] == "EST" else COMPNOME[g["comp"]]
     fase = FASENOME.get(g["fase"], "")
-    if g["tipo"] == "turno": fase = "Final de turno"
+    if g["tipo"] == "turno": fase = (FASENOME.get(g["fase"], "Mata-mata") + " de turno")
     if g["tipo"] == "consolacao": fase = "Taça Rio (consolação)"
     return f"{c} {g['temp']}" + (f" · {fase}" if fase else "")
 

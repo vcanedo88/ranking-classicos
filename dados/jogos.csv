@@ -97,17 +97,17 @@ fla_flu,2020-09-09,Fluminense,1,2,Flamengo,BR,2020,R9,,,,,
 fla_flu,2020-07-15,Flamengo,1,0,Fluminense,EST,2020,F,,,,,
 fla_flu,2020-07-12,Fluminense,1,2,Flamengo,EST,2020,F,,,,,
 fla_flu,2020-07-08,Fluminense,1,1,Flamengo,EST,2020,F,3,2,turno,,
-fla_flu,2020-02-12,Fluminense,2,3,Flamengo,EST,2020,SF,,,,,
+fla_flu,2020-02-12,Fluminense,2,3,Flamengo,EST,2020,SF,,,turno,,Semifinal da Taça Guanabara 2020
 fla_flu,2020-01-29,Flamengo,0,1,Fluminense,EST,2020,B,,,,,
 fla_flu,2019-10-20,Flamengo,2,0,Fluminense,BR,2019,R27,,,,,
 fla_flu,2019-06-09,Fluminense,0,0,Flamengo,BR,2019,R8,,,,,
-fla_flu,2019-04-06,Flamengo,1,1,Fluminense,EST,2019,SF,,,,,
-fla_flu,2019-03-27,Fluminense,1,2,Flamengo,EST,2019,SF,,,,,
+fla_flu,2019-04-06,Flamengo,1,1,Fluminense,EST,2019,SF,,,,Flamengo,"Semifinal do Carioca 2019 (jogo único), Flamengo avançou pela vantagem"
+fla_flu,2019-03-27,Fluminense,1,2,Flamengo,EST,2019,SF,,,turno,,Semifinal da Taça Rio 2019 (jogo único)
 fla_flu,2019-03-24,Flamengo,3,2,Fluminense,EST,2019,B,,,,,
-fla_flu,2019-02-14,Flamengo,0,1,Fluminense,EST,2019,SF,,,,,
+fla_flu,2019-02-14,Flamengo,0,1,Fluminense,EST,2019,SF,,,turno,,Semifinal da Taça Guanabara 2019
 fla_flu,2018-10-13,Flamengo,3,0,Fluminense,BR,2018,R29,,,,,
 fla_flu,2018-06-07,Fluminense,0,2,Flamengo,BR,2018,R10,,,,,
-fla_flu,2018-03-22,Fluminense,1,1,Flamengo,EST,2018,SF,,,,Fluminense,
+fla_flu,2018-03-22,Fluminense,1,1,Flamengo,EST,2018,SF,,,turno,Fluminense,"Semifinal da Taça Rio 2018, Fluminense avançou pela vantagem"
 fla_flu,2018-02-24,Fluminense,4,0,Flamengo,EST,2018,C,,,,,
 fla_flu,2017-11-01,Flamengo,3,3,Fluminense,SUL,2017,QF,,,,,
 fla_flu,2017-10-25,Fluminense,0,1,Flamengo,SUL,2017,QF,,,,,
